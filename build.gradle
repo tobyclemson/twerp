@@ -3,6 +3,8 @@ apply plugin: 'idea'
 apply plugin: 'application'
 apply plugin: 'me.champeau.gradle.antlr4'
 
+defaultTasks "test", "integrationTest"
+
 buildscript {
     repositories {
         maven {
@@ -74,7 +76,23 @@ run {
             .toList()
 }
 
+test {
+    useTestNG()
+
+    testLogging {
+        showStandardStreams = false
+        exceptionFormat "full"
+    }
+}
+
 task integrationTest(type: Test) {
+    useTestNG()
+
+    testLogging {
+        showStandardStreams = false
+        exceptionFormat "full"
+    }
+
     testClassesDir = sourceSets.integrationTest.output.classesDir
     classpath += sourceSets.integrationTest.runtimeClasspath
 }
