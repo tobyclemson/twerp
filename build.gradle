@@ -48,7 +48,7 @@ antlr4 {
 mainClassName = "twerp.lang.Main"
 
 run {
-    args = twerpArguments
+    args = System.getProperty("arguments", "")
             .split(' ')
             .toList()
 }
