@@ -1,7 +1,5 @@
 package twerp.lang.runtime;
 
-public class TwerpPrinter {
-    public void print(TwerpPrintable printable) {
-
-    }
+public interface TwerpPrinter {
+    void print(TwerpPrintable printable);
 }

@@ -67,3 +67,8 @@ workgroupFinder by id "123" and name "Whatever"
 
 workgroupFinder.byIdAndName("123", "Whatever")
 ```
+
+TODO
+====
+
+- Handle missing source file when reading

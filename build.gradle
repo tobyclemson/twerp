@@ -23,15 +23,22 @@ repositories {
 
 configurations {
     compile.extendsFrom antlr4
+    integrationTestCompile.extendsFrom runtime
 }
 
 dependencies {
     compile 'org.projectlombok:lombok:1.14.4'
+    compile 'com.google.inject:guice:4.0-beta4'
 
     testCompile 'org.testng:testng:6.8.8'
     testCompile 'org.mockito:mockito-core:1.9.5'
     testCompile 'org.hamcrest:hamcrest-core:1.3'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
+
+    integrationTestCompile 'org.testng:testng:6.8.8'
+    integrationTestCompile 'org.mockito:mockito-core:1.9.5'
+    integrationTestCompile 'org.hamcrest:hamcrest-core:1.3'
+    integrationTestCompile 'org.hamcrest:hamcrest-library:1.3'
 }
 
 sourceSets {
@@ -39,6 +46,15 @@ sourceSets {
         java {
             srcDirs += antlr4.output
         }
+    }
+    integrationTest {
+        java {
+            srcDir 'src/integration-test/java'
+        }
+        resources {
+            srcDir 'src/integration-test/resources'
+        }
+        compileClasspath += sourceSets.main.runtimeClasspath
     }
 }
 
@@ -58,9 +74,21 @@ run {
             .toList()
 }
 
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath += sourceSets.integrationTest.runtimeClasspath
+}
+
 compileJava.dependsOn antlr4
 
 
 task wrapper(type: Wrapper) {
     gradleVersion = "2.0"
+}
+
+idea {
+    module {
+        testSourceDirs += file('src/integration-test/java')
+        testSourceDirs += file('src/integration-test/resources')
+    }
 }
