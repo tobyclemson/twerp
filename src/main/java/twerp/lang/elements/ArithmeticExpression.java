@@ -1,6 +1,5 @@
 package twerp.lang.elements;
 
-import lombok.AllArgsConstructor;
 import lombok.Value;
 import org.antlr.v4.runtime.Token;
 
