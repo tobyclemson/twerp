@@ -1,9 +1,60 @@
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'application'
+apply plugin: 'me.champeau.gradle.antlr4'
+
+buildscript {
+    repositories {
+        maven {
+            name 'JFrog OSS snapshot repo'
+            url  'https://oss.jfrog.org/oss-snapshot-local/'
+        }
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'me.champeau.gradle:antlr4-gradle-plugin:0.1'
+    }
+}
 
 repositories {
     mavenCentral()
 }
+
+configurations {
+    compile.extendsFrom antlr4
+}
+
+dependencies {
+    compile 'org.projectlombok:lombok:1.14.4'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += antlr4.output
+        }
+    }
+}
+
+antlr4 {
+    source = file('src/main/antlr')
+    output = file('src/main/java/twerp/lang/grammar')
+    listener = false
+    visitor = true
+    extraArgs = ['-package', 'twerp.lang.grammar']
+}
+
+mainClassName = "twerp.lang.Main"
+
+run {
+    args = twerpArguments
+            .split(' ')
+            .toList()
+}
+
+compileJava.dependsOn antlr4
+
 
 task wrapper(type: Wrapper) {
     gradleVersion = "2.0"
