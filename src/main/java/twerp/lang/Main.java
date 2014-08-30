@@ -4,7 +4,7 @@ import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import twerp.lang.grammar.TwerpLexer;
 import twerp.lang.grammar.TwerpParser;
-import twerp.lang.interpreter.Twerpterpreter;
+import twerp.lang.interpreter.TwerpInterpreter;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ public class Main {
 
         TwerpParser twerpParser = new TwerpParser(tokenStream);
 
-        System.out.println(new Twerpterpreter()
+        System.out.println(new TwerpInterpreter()
                 .visitExpression(twerpParser.expression())
                 .evaluate());
     }

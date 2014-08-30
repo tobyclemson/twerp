@@ -6,7 +6,7 @@ import twerp.lang.elements.ArithmeticExpression;
 import twerp.lang.grammar.TwerpBaseVisitor;
 import twerp.lang.grammar.TwerpParser;
 
-public class Twerpterpreter extends TwerpBaseVisitor<ArithmeticExpression> {
+public class TwerpInterpreter extends TwerpBaseVisitor<ArithmeticExpression> {
     @Override
     public ArithmeticExpression visitExpression(@NotNull TwerpParser.ExpressionContext context) {
         Token leftOperand = context.DIGIT(0).getSymbol();
