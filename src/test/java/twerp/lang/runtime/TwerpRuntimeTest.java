@@ -32,10 +32,23 @@ public class TwerpRuntimeTest {
         TwerpRuntime runtime = new TwerpRuntime(reader, evaluator, printer);
 
         // When
-        runtime.startWith(pathToSourceFile);
+        runtime.evaluate(pathToSourceFile);
 
         // Then
         verify(reader).readFileAt(Paths.get(pathToSourceFile));
+    }
+
+    @Test
+    public void evaluatesTheGivenInputStream() throws Exception {
+        // Given
+        InputStream inputStream = mock(InputStream.class);
+        TwerpRuntime runtime = new TwerpRuntime(reader, evaluator, printer);
+
+        // When
+        runtime.evaluate(inputStream);
+
+        // Then
+        verify(evaluator).evaluate(inputStream);
     }
 
     @Test
@@ -50,14 +63,14 @@ public class TwerpRuntimeTest {
                 .willReturn(inputStream);
 
         // When
-        runtime.startWith(pathToSourceFile);
+        runtime.evaluate(pathToSourceFile);
 
         // Then
         verify(evaluator).evaluate(inputStream);
     }
 
     @Test
-    public void printsPrintableReturnedAfterEvaluation() throws Exception {
+    public void printsPrintableReturnedAfterEvaluationOfSourceFile() throws Exception {
         // Given
         String pathToSourceFile = "some/sort/of/path.tw";
         TwerpPrintable printable = mock(TwerpPrintable.class);
@@ -68,7 +81,25 @@ public class TwerpRuntimeTest {
                 .willReturn(printable);
 
         // When
-        runtime.startWith(pathToSourceFile);
+        runtime.evaluate(pathToSourceFile);
+
+        // Then
+        verify(printer).print(printable);
+    }
+
+    @Test
+    public void printsPrintableReturnedAfterEvaluationOfInputStream() throws Exception {
+        // Given
+        InputStream inputStream = mock(InputStream.class);
+        TwerpPrintable printable = mock(TwerpPrintable.class);
+
+        TwerpRuntime runtime = new TwerpRuntime(reader, evaluator, printer);
+
+        given(evaluator.evaluate(any(InputStream.class)))
+                .willReturn(printable);
+
+        // When
+        runtime.evaluate(inputStream);
 
         // Then
         verify(printer).print(printable);

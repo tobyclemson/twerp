@@ -31,6 +31,8 @@ configurations {
 dependencies {
     compile 'org.projectlombok:lombok:1.14.4'
     compile 'com.google.inject:guice:4.0-beta4'
+    compile 'com.google.guava:guava:18.0'
+    compile 'org.javafunk.funk:funk:0.1.22'
 
     testCompile 'org.testng:testng:6.8.8'
     testCompile 'org.mockito:mockito-core:1.9.5'

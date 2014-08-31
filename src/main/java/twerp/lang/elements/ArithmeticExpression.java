@@ -5,11 +5,11 @@ import org.antlr.v4.runtime.Token;
 
 @Value
 public class ArithmeticExpression {
-    Token leftOperand;
-    Token rightOperand;
-    Token binaryOperator;
+    NumericExpression leftOperand;
+    NumericExpression rightOperand;
+    BinaryOperator binaryOperator;
 
     public Number evaluate() {
-        return Integer.parseInt(leftOperand.getText()) + Integer.parseInt(rightOperand.getText()) ;
+        return binaryOperator.computes(leftOperand, rightOperand).evaluate();
     }
 }

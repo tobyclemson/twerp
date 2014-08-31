@@ -22,7 +22,7 @@ public class TwerpLexer extends Lexer {
 
 	public static final String[] tokenNames = {
 		"<INVALID>",
-		"DIGIT", "'+'"
+		"DIGIT", "BINARYOP"
 	};
 	public static final String[] ruleNames = {
 		"DIGIT", "BINARYOP"
@@ -54,10 +54,10 @@ public class TwerpLexer extends Lexer {
 
 	public static final String _serializedATN =
 		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\2\4\16\b\1\4\2\t\2"+
-		"\4\3\t\3\3\2\6\2\t\n\2\r\2\16\2\n\3\3\3\3\2\2\4\3\3\5\4\3\2\3\3\2\62;"+
-		"\16\2\3\3\2\2\2\2\5\3\2\2\2\3\b\3\2\2\2\5\f\3\2\2\2\7\t\t\2\2\2\b\7\3"+
-		"\2\2\2\t\n\3\2\2\2\n\b\3\2\2\2\n\13\3\2\2\2\13\4\3\2\2\2\f\r\7-\2\2\r"+
-		"\6\3\2\2\2\4\2\n\2";
+		"\4\3\t\3\3\2\6\2\t\n\2\r\2\16\2\n\3\3\3\3\2\2\4\3\3\5\4\3\2\4\3\2\62;"+
+		"\4\2--//\16\2\3\3\2\2\2\2\5\3\2\2\2\3\b\3\2\2\2\5\f\3\2\2\2\7\t\t\2\2"+
+		"\2\b\7\3\2\2\2\t\n\3\2\2\2\n\b\3\2\2\2\n\13\3\2\2\2\13\4\3\2\2\2\f\r\t"+
+		"\3\2\2\r\6\3\2\2\2\4\2\n\2";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

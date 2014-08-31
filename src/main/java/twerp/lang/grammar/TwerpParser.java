@@ -17,7 +17,7 @@ public class TwerpParser extends Parser {
 	public static final int
 		DIGIT=1, BINARYOP=2;
 	public static final String[] tokenNames = {
-		"<INVALID>", "DIGIT", "'+'"
+		"<INVALID>", "DIGIT", "BINARYOP"
 	};
 	public static final int
 		RULE_expression = 0;

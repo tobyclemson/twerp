@@ -24,10 +24,13 @@ public class TwerpRuntime {
         this.printer = printer;
     }
 
-    public void startWith(String sourceFile) {
+    public void evaluate(String sourceFile) {
         InputStream inputStream = reader.readFileAt(Paths.get(sourceFile));
+        evaluate(inputStream);
+    }
+
+    public void evaluate(InputStream inputStream) {
         TwerpPrintable printable = evaluator.evaluate(inputStream);
         printer.print(printable);
     }
-
 }
